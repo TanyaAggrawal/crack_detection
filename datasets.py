@@ -50,7 +50,7 @@ class DroneImage:
         except IOError:
             print(self.image_name, 'can Not read label, replace with zeros 1')
             self.raw_label = []
-            self.label = np.zeros(self.image.shape[0:2])
+            self.label = np.zeros(self.image.shape)
         try:
             self.raw_pred = Image.open(self.pred_name)
             self.pred = get_label(self.raw_pred)
@@ -58,7 +58,7 @@ class DroneImage:
         except IOError:
             print(self.image_name, 'can Not read pred, replace with zeros')
             self.raw_pred = []
-            self.pred = np.zeros(self.image.shape[0:2])
+            self.pred = np.zeros(self.image.shape)
             print(self.pred)
 
         self.crack_index = where(self.label == 1)
