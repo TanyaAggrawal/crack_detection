@@ -48,16 +48,18 @@ class DroneImage:
             self.raw_label = Image.open(self.label_name)
             self.label = get_label(self.raw_label)
         except IOError:
-            print(self.image_name, 'can Not read label, replace with zeros')
+            print(self.image_name, 'can Not read label, replace with zeros 1')
             self.raw_label = []
             self.label = np.zeros(self.image.shape[0:2])
         try:
             self.raw_pred = Image.open(self.pred_name)
             self.pred = get_label(self.raw_pred)
+            print(self.pred)
         except IOError:
             print(self.image_name, 'can Not read pred, replace with zeros')
             self.raw_pred = []
             self.pred = np.zeros(self.image.shape[0:2])
+            print(self.pred)
 
         self.crack_index = where(self.label == 1)
 
