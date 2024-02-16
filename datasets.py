@@ -43,7 +43,8 @@ class DroneImage:
 
     def __load__(self):
         self.raw_image = Image.open(self.image_name)
-        self.image = np.array(self.raw_image)
+        self.image = np.array(self.raw_image)[...,0:3]
+
         try:
             self.raw_label = Image.open(self.label_name)
             self.label = get_label(self.raw_label)
