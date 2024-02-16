@@ -11,17 +11,17 @@ from concurrent.futures import ProcessPoolExecutor
 class DroneImage:
     def __init__(self, image_name, label_name=None, pred_name=None, load=True, label_format='jpg', **keys):
         if keys.get('image_appendix') is None:
-            image_appendix = '.tif'
+            image_appendix = '.png'
         else:
             image_appendix = keys['image_appendix']
         if label_name is None:
             if keys.get('label_appendix') is None:
-                label_name = image_name.replace(image_appendix, '_label.tif')
+                label_name = image_name.replace(image_appendix, '_label.png')
             else:
                 label_name = image_name.replace(image_appendix, keys['label_appendix'])
         if pred_name is None:
             if keys.get('pred_appendix') is None:
-                pred_name = image_name.replace(image_appendix, '_pred.tif')
+                pred_name = image_name.replace(image_appendix, '_pred.png')
             else:
                 pred_name = image_name.replace(image_appendix, keys['pred_appendix'])
 
@@ -153,10 +153,13 @@ class DroneImage:
         return sample_image, sample_label
 
     def plot_picked(self):
-        name = self.image_name.replace('.tif', '_samples.tif')
+        name = self.image_name.replace('.png', '_samples.png')
         name = name.replace('row', 'picked_row')
         plot_samples(self.image, self.label, self.pred, self.pick_index,
                      image_name=name)
+
+
+
 
     def confusion_matrix_length(self, tolerance=40, is_show=False, show_bg=False):
         if show_bg:
@@ -181,9 +184,9 @@ class DataSetBalanced:
 
         self.special_num = len(self.special)
         self.labelled_num = len(self.labelled)
-        self.label_appendix = '_label.tif'
+        self.label_appendix = '_label.png'
         self.pred_appendix = '_pred.jpg'
-        self.image_appendix = 'tif'
+        self.image_appendix = 'png'
         self.close_standards = [70, 100, 150]
 
     def __load_images__(self, labelled, special=[]):
