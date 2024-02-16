@@ -59,6 +59,7 @@ class DroneImage:
             self.raw_pred = []
             self.pred = np.zeros(self.image.shape[0:2])
 
+
         self.crack_index = where(self.label == 1)
 
         skeleton_pred = self.pred
